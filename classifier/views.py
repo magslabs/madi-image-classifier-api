@@ -83,7 +83,7 @@ class PredictImageView(APIView):
             return Response({"error": "No image provided"}, status=status.HTTP_400_BAD_REQUEST)
 
         uploaded_image = request.FILES['image']
-        image_path = default_storage.save('temp/' + uploaded_image.name, uploaded_image)  # Save temp image
+        image_path = default_storage.save('temp/uploads/' + uploaded_image.name, uploaded_image)  # Save temp image
 
         try:
             # Load and preprocess the image
