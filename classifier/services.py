@@ -35,6 +35,7 @@ image_data_np = []
 labels_np = []
 
 def load_trained_model():
+    os.path.join(staticfiles_dir, "classifier_model.keras")
     model_path = os.path.join(staticfiles_dir, "classifier_model.keras")
     if os.path.exists(model_path):
         return load_model(model_path)
@@ -186,4 +187,20 @@ def evaluate_model(model):
 def start_training_process():
     load_dataset()
     train_model()
+        
+def predict():
+    model = load_trained_model()
+    
+    for i in range(10): # To predict 10 samples
+        image_picked = random.randint(0, len(image_data_np) - 1) # To pick a random image to be predicted
+        
+        pyplot.imshow(image_data_np[image_picked])
+        pyplot.axis('off')
+        pyplot.show()
+
+        image_array = np.expand_dims(image_data_np[image_picked], axis=0)
+        prediction = model.predict(image_array)
+        print("Predicted class:", class_names[np.argmax(prediction)])
+
+        time.sleep(1) # To pause for 1 second before the next iteration to display the image being predicted
 

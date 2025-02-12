@@ -101,7 +101,7 @@ class PredictImageView(APIView):
 
             # Retrieve class names from dataset
             dataset_dir = os.path.join(settings.MEDIA_ROOT, "dataset")
-            class_names = sorted(os.listdir(dataset_dir)) # Ensure sorted order
+            class_names = os.listdir(dataset_dir) # Ensure sorted order
 
             predicted_class = class_names[predicted_class_index] if predicted_class_index < len(class_names) else "Unknown"
 
